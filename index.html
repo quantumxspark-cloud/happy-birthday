@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Double Celebration for Sonia!</title>
+    <style>
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #4ecdc4;
+            --accent: #ffe66d;
+            --dark: #292f36;
+            --light: #f7fff7;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px var(--light);
+            }
+            to {
+                text-shadow: 0 0 20px var(--accent), 0 0 30px var(--primary);
+            }
+        }
+        
+        .photo-frame {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 2rem;
+            border: 10px solid var(--light);
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            transition: all 0.3s ease;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .photo-frame:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+        
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .celebration-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .celebration-card {
+            background-color: var(--light);
+            border-radius: 20px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .celebration-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+        
+        .celebration-card h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .celebration-card h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--secondary);
+        }
+        
+        .celebration-card p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .wish-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .wish-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--accent);
+            opacity: 0;
+        }
+        
+        .message-box {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--light);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            z-index: 100;
+        }
+        
+        .message-box.show {
+            transform: translateX(0);
+        }
+        
+        .audio-control {
+            position: fixed;
+            bottom: 1rem;
+            left: 1rem;
+            background-color: var(--light);
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .countdown-item {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 80px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .countdown-item span:first-child {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .countdown-item span:last-child {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .photo-frame {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .celebration-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Double Celebration for Sonia!</h1>
+            <div class="photo-frame">
+                <img src="" alt="Beautiful sister smiling on her special day">
+            </div>
+        </header>
+        
+        <div class="countdown" id="countdown">
+            <h3 style="color: white; margin-bottom: 1rem;">Birthday Celebration Time Passed</h3>
+            <div class="countdown-item">
+                <span id="days">00</span>
+                <span>Days</span>
+            </div>
+            <div class="countdown-item">
+                <span id="hours">00</span>
+                <span>Hours</span>
+            </div>
+            <div class="countdown-item">
+                <span id="minutes">00</span>
+                <span>Minutes</span>
+            </div>
+            <div class="countdown-item">
+                <span id="seconds">00</span>
+                <span>Seconds</span>
+            </div>
+        </div>
+        
+        <div class="celebration-container">
+            <div class="celebration-card">
+                <h2>Happy Birthday!</h2>
+                <p>On this special day, I wish you endless happiness, good health, and all the success in the world. May all your dreams come true!</p>
+                <p>You're not just my sister, but my best friend and my biggest supporter. Thank you for always being there for me.</p>
+                <button class="wish-btn" onclick="showBirthdayWish()">Wish Her</button>
+            </div>
+            
+            <div class="celebration-card">
+                <h2>Happy Rakshabandhan!</h2>
+                <p>This sacred thread is not just a symbol of love but a promise that I'll always be there for you, no matter what.</p>
+                <p>May our bond grow stronger with each passing year, filled with trust, love, and understanding.</p>
+                <button class="wish-btn" onclick="showRakhiWish()">Tie Rakhi</button>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer" style="text-align: center; margin-top: 2rem; color: white;">
+            <p>Designed with ❤️ by <a href="https://www.instagram.com/_onlyspark_?igsh=MXNiMWRtMmJnYzd2NA==" target="_blank" style="color: var(--accent); text-decoration: none;">Ravi aka Spark</a></p>
+        </div>
+    </div>
+    
+    <div class="message-box" id="messageBox">
+        <p id="messageText"></p>
+    </div>
+    
+    <div class="audio-control" onclick="toggleMusic()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+            <line x1="12" y1="19" x2="12" y2="23"></line>
+            <line x1="8" y1="23" x2="16" y2="23"></line>
+        </svg>
+    </div>
+    
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script>
+        // Background music control
+        const music = document.getElementById('bgMusic');
+        let isMusicPlaying = false;
+        
+        function toggleMusic() {
+            if (isMusicPlaying) {
+                music.pause();
+            } else {
+                music.play();
+            }
+            isMusicPlaying = !isMusicPlaying;
+        }
+        
+        // Show message box with wishes
+        function showMessage(message) {
+            const messageBox = document.getElementById('messageBox');
+            const messageText = document.getElementById('messageText');
+            
+            messageText.textContent = message;
+            messageBox.classList.add('show');
+            
+            // Create confetti
+            createConfetti();
+            
+            setTimeout(() => {
+                messageBox.classList.remove('show');
+            }, 5000);
+        }
+        
+        function showBirthdayWish() {
+            showMessage("Happy Birthday Sonia! May you have a fantastic year ahead filled with joy and success! Love, Ravi (Spark)");
+        }
+        
+        function showRakhiWish() {
+            showMessage("Happy Rakshabandhan Sonia! This thread symbolizes my promise to always protect and support you. From your loving brother Ravi (Spark)");
+        }
+        
+        // Confetti effect
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#ffe66d', '#fff', '#292f36'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.top = '-10px';
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                
+                document.body.appendChild(confetti);
+                
+                const animDuration = Math.random() * 3 + 2;
+                confetti.style.animation = `fall ${animDuration}s linear forwards`;
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, animDuration * 1000);
+            }
+            
+            // Add confetti CSS
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fall {
+                    to {
+                        transform: translateY(100vh) rotate(360deg);
+                        opacity: 1;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Countdown timer
+        function updateCountdown() {
+            const now = new Date();
+            const countdownDate = new Date("Aug 9, 2025 00:00:00").getTime();
+            const nowTime = new Date().getTime();
+            let distance = nowTime - countdownDate;
+            
+            if (distance < 0) distance = -distance;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = (Math.floor(distance / (1000 * 60 * 60))) % 24;
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
